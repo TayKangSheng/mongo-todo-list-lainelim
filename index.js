@@ -1,4 +1,8 @@
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/todos')
+mongoose.Promise = global.Promise
 const todos = require('./controllers/todos_controller.js')
+// const Todo = require('./models/todo')
 const readline = require('readline')
 const rl = readline.createInterface(process.stdin, process.stdout)
 const prefix = '> '
@@ -42,6 +46,10 @@ rl.on('line', (line) => {
     case 'destroy':
       todos.destroy(words[1])
       break
+    case 'destroyAll':
+        todos.destroyAll()
+        break
+
     case 'quit':
       rl.close()
       return
